@@ -43,7 +43,7 @@ public class WeatherManager implements Weather {
      * Add the given spawnPoint to the weather manager for it to handle ticking it and
      * any other game logic.
      *
-     * @param spawnPoint - spawn point we wish top use
+     * @param spawnPoint spawn point we wish top use
      */
     public void addSpawnPoint(WeatherSpawnPoint spawnPoint) {
         spawnPoints.add(spawnPoint);
@@ -52,7 +52,7 @@ public class WeatherManager implements Weather {
     /**
      * Adds a GameEntity to be managed by the WeatherManager.
      *
-     * @param weather - GameEntity instance of a weather Phenomenon.
+     * @param weather GameEntity instance of a weather Phenomenon.
      */
     public void addWeather(GameEntity weather) {
         phenomena.add(weather);
@@ -62,8 +62,8 @@ public class WeatherManager implements Weather {
      * Return if the given title location should be currently obscured by the
      * internal weather system.
      *
-     * @param dimensions - screen and tile dimensions
-     * @param position   - position requesting for the obscured status of
+     * @param dimensions screen and tile dimensions
+     * @param position   position requesting for the obscured status of
      * @return if the given title location should be currently obscured by the
      * internal weather system.
      */
@@ -88,9 +88,14 @@ public class WeatherManager implements Weather {
      * Return {@link Damage} the given tile location is currently experiencing otherwise
      * returns null.
      *
-     * @param dimensions - screen and tile dimensions
-     * @param position   - position requesting for the damage status of
-     * @return {@link Damage} the given tile location is currently experiencing otherwise
+     * <p>Precondition: {@code dimensions} and {@code position} must not be {@code null}</p>
+     *
+     * <p>Postcondition: returns a {@link Damage} instance if {@link Damage} phenomenon shares the same
+     * tile as {@code position}. otherwise, returns {@code null}</p>
+     *
+     * @param dimensions screen and tile dimensions
+     * @param position   position requesting for the damage status of
+     * @return {@link Damage} at the given tile location that currently experiencing damage. otherwise
      * returns null.
      */
     public Damage getDamage(Dimensions dimensions, Positionable position) {
@@ -109,6 +114,16 @@ public class WeatherManager implements Weather {
         return null;
     }
 
+    /**
+     * Return {@code null} because {@link WeatherManager} is not a weather phenomenon and does not produce
+     * damage directly
+     *
+     * <p>Phenomenas such as {@link AcidCloud} produces damage on their own with {@link Damaging#getDamage()}
+     * implementations
+     * </p>
+     *
+     * @return {@code null} always.
+     */
     @Override
     public Damage getDamage() {
         return null;
@@ -117,25 +132,19 @@ public class WeatherManager implements Weather {
     /**
      * Return if the given tile location is experiencing damaging conditions.
      *
-     * @param dimensions - screen and tile dimensions
-     * @param position   - position requesting for the damage status of
-     * @return if the given tile location is experiencing damaging conditions.
+     * <p>Delegates the underlying logic to {@link #getDamage(Dimensions, Positionable)}. Converts
+     * a {@code Damage} object to a boolean status.</p>
+     *
+     * <p>Precondition: {@code dimensions} and {@code position} must not be null</p>
+     *
+     * @param dimensions screen and tile dimensions for pixel to tile conversion
+     * @param position   the position to check for damaging weather
+     * @return {@code true} if the given tile location is experiencing damaging conditions.
+     *          otherwise, returns {@code false}.
      */
     @Override
     public boolean isDamaging(Dimensions dimensions, Positionable position) {
-        //work out the grid we are checking against
-        int gridX = dimensions.pixelToTile(position.getX());
-        int gridY = dimensions.pixelToTile(position.getY());
-
-        for (GameEntity weather : phenomena) {
-            final int weatherGridX = dimensions.pixelToTile(weather.getX());
-            final int weatherGridY = dimensions.pixelToTile(weather.getY());
-
-            if (gridX == weatherGridX && gridY == weatherGridY && weather instanceof Damaging) {
-                return true;
-            }
-        }
-        return false;
+        return getDamage(dimensions, position) != null;
     }
 
     /**
@@ -143,7 +152,7 @@ public class WeatherManager implements Weather {
      * Moves any {@link Lightning} that are within the radius {@value LightningRod#RADIUS}
      * of the given position to the given position.
      *
-     * @param position - position of the lightning rod that the weather should be adjusted for.
+     * @param position position of the lightning rod that the weather should be adjusted for.
      */
     @Override
     public void applyLightningRod(Positionable position) {
