@@ -2,7 +2,6 @@ package toxiccleanup.builder.machines;
 
 import toxiccleanup.engine.game.Position;
 import toxiccleanup.engine.game.Positionable;
-import toxiccleanup.builder.util.MockAdjustable;
 import toxiccleanup.engine.timing.TickTimer;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,11 +27,6 @@ import static org.junit.Assert.*;
  */
 public class MachinesManagerTest {
 
-    /*
-    =========================================================================
-                                Shared Tests
-    =========================================================================
-    */
 
     /** A simple fixed position used wherever a spawn location is required. */
     private static final Position POS_A = new Position(100, 100);
@@ -49,6 +43,26 @@ public class MachinesManagerTest {
     }
 
 
+    // -----------------------------------------------------------------------
+    // Helper — a TickTimer that always reports isFinished() == true
+    // -----------------------------------------------------------------------
+
+    /** Returns a TickTimer whose isFinished() always returns true (cooldown always ready). */
+    private static TickTimer alwaysFinishedTimer() {
+        return new TickTimer() {
+            @Override public void tick() {}
+            @Override public boolean isFinished() { return true; }
+        };
+    }
+
+    /** Returns a TickTimer whose isFinished() always returns false (cooldown never ready). */
+    private static TickTimer neverFinishedTimer() {
+        return new TickTimer() {
+            @Override public void tick() {}
+            @Override public boolean isFinished() { return false; }
+        };
+    }
+
     /*
     =========================================================================
                                 Constructors Tests
@@ -64,21 +78,21 @@ public class MachinesManagerTest {
     }
 
     /**
-     * The int constructor should accept a valid value and store it exactly.
+     * The int constructor should store a valid value exactly.
      */
     @Test
     public void intConstructorStoresExactValueWithinRange() {
         MachinesManager m = new MachinesManager(7);
-        assertEquals("int constructor should store power 7", 7, m.getPower());
+        assertEquals(7, m.getPower());
     }
 
     /**
-     * Values below 0 (negative values) passed to the int constructor must be clamped to 0.
+     * Values below 0 passed to the int constructor must be clamped to 0.
      */
     @Test
     public void intConstructorClampsNegativeToZero() {
         MachinesManager m = new MachinesManager(-99);
-        assertEquals("negative starting power should be clamped to 0", 0, m.getPower());
+        assertEquals(0, m.getPower());
     }
 
     /**
@@ -87,7 +101,7 @@ public class MachinesManagerTest {
     @Test
     public void intConstructorClampsAboveMaxToMax() {
         MachinesManager m = new MachinesManager(999);
-        assertEquals("starting power above 14 should be clamped to 14", 14, m.getPower());
+        assertEquals(14, m.getPower());
     }
 
     /**
@@ -95,16 +109,7 @@ public class MachinesManagerTest {
      */
     @Test
     public void timerConstructorStartsPowerAtZero() {
-        TickTimer alwaysFinished = new TickTimer() {
-            @Override
-            public void tick() {}
-
-            @Override
-            public boolean isFinished() {
-                return true;
-            }
-        };
-        MachinesManager m = new MachinesManager(alwaysFinished);
+        MachinesManager m = new MachinesManager(alwaysFinishedTimer());
         assertEquals("timer-injection constructor power should default to 0", 0, m.getPower());
     }
 
@@ -120,7 +125,7 @@ public class MachinesManagerTest {
     @Test
     public void getMaxPowerAlwaysReturns14() {
         assertEquals(14, manager.getMaxPower());
-        manager.setPower(0); // set the power to 0, to test getMaxPower again
+        manager.setPower(0);
         assertEquals(14, manager.getMaxPower());
     }
 
@@ -374,7 +379,13 @@ public class MachinesManagerTest {
     @Test
     public void spawnPumpReturnsNonNullWhenPowerSufficient() {
         manager.setPower(Pump.COST);
-        assertNotNull(manager.spawnPump(POS_A, new MockAdjustable()));
+        assertNotNull(manager.spawnPump(POS_A, new Adjustable() {
+            @Override
+            public void adjust(int amount) {
+                // purposely left empty, because we only need to satisfy the Adjustable requirement
+                // in spawnPump parameters
+            }
+        }));
     }
 
     /**
@@ -383,7 +394,13 @@ public class MachinesManagerTest {
     @Test
     public void spawnPumpDeductsCostFromPower() {
         manager.setPower(14);
-        manager.spawnPump(POS_A, new MockAdjustable());
+        manager.spawnPump(POS_A, new Adjustable() {
+            @Override
+            public void adjust(int amount) {
+                // purposely left empty, because we only need to satisfy the Adjustable requirement
+                // in spawnPump parameters
+            }
+        });
         assertEquals(14 - Pump.COST, manager.getPower());
     }
 
@@ -394,18 +411,29 @@ public class MachinesManagerTest {
     @Test
     public void spawnPumpReturnsNullWhenPowerInsufficient() {
         manager.setPower(Pump.COST - 1);
-        assertNull(manager.spawnPump(POS_A, new MockAdjustable()));
+        assertNull(manager.spawnPump(POS_A, new Adjustable() {
+            @Override
+            public void adjust(int amount) {
+                // purposely left empty, because we only need to satisfy the Adjustable requirement
+                // in spawnPump parameters
+            }
+        }));
     }
-
     /**
      * spawnPump should not change power when it failed to spawn.
      */
     @Test
     public void spawnPumpDoesNotChangePowerOnFailure() {
-        int startPower = Pump.COST - 1;
-        manager.setPower(startPower);
-        manager.spawnPump(POS_A, new MockAdjustable());
-        assertEquals(startPower, manager.getPower());
+        int start = Pump.COST - 1;
+        manager.setPower(start);
+        manager.spawnPump(POS_A, new Adjustable() {
+            @Override
+            public void adjust(int amount) {
+                // purposely left empty, because we only need to satisfy the Adjustable requirement
+                // in spawnPump parameters
+            }
+        });
+        assertEquals(start, manager.getPower());
     }
 
     /*
@@ -488,7 +516,7 @@ public class MachinesManagerTest {
 
     /*
     =========================================================================
-          getNextTeleporterPosition — AND/OR overlap-check correctness
+          getNextTeleporterPosition — overlap teleporter check
     =========================================================================
     */
 
