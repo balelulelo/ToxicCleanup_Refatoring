@@ -1,0 +1,81 @@
+lightning:1:
+|    cv  |
+|   cv   |
+|     c  |
+|        |
+|        |
+|        |
+|        |
+|        |
+lightning:2:
+|        |
+|        |
+|   c    |
+|  cv    |
+|  vcc   |
+|    vc  |
+|    cv  |
+|  VcvV  |
+lightning:3:
+|        |
+|        |
+|        |
+|   v    |
+|   cc   |
+|    v   |
+|    c   |
+|  VcvV  |
+lightning:4:
+|        |
+|        |
+|        |
+|        |
+|        |
+|        |
+|    c   |
+|  BccB  |
+lightning:5:
+|        |
+|        |
+|        |
+|        |
+|        |
+|    v   |
+|   vcv  |
+|  BccB  |
+lightning:6:
+|        |
+|        |
+|        |
+|        |
+|  v   v |
+|    c   |
+|v  ccc  |
+|  BccB  |
+lightning:7:
+|        |
+|        |
+|        |
+| v     v|
+|        |
+|    c   |
+|   c c  |
+|  v  v  |
+lightning:8:
+|        |
+|        |
+|c      c|
+|        |
+|     c  |
+|  c     |
+|        |
+|        |
+lightning:9:
+|        |
+|        |
+|        |
+|        |
+|        |
+|        |
+|        |
+|        |

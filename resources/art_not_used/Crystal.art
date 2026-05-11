@@ -1,0 +1,27 @@
+crystal:default:
+|        |
+|  P  P  |
+| PrR rP |
+| PrRRrP |
+| PrRRrP |
+| *RRRR* |
+|  ####  |
+|        |
+crystal:damaged:
+|        |
+|  p  p  |
+| prp rp |
+| prrrrp |
+| PrRRrP |
+| *RRRR* |
+|  ####  |
+|        |
+crystal:depleted:
+|        |
+|  p  p  |
+| ppr pp |
+| prrPrp |
+| pPPRPp |
+| *PRRP* |
+|  ####  |
+|        |

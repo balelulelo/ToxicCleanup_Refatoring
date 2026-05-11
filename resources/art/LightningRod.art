@@ -1,0 +1,18 @@
+lightningrod:default:
+|        |
+|   .w   |
+|   .w   |
+|   ..   |
+|   ..   |
+|  #..#  |
+| ##kk## |
+|  ####  |
+lightningrod:damaged:
+|        |
+|  #     |
+|  ##    |
+|  ###   |
+|   ##   |
+|  k##k  |
+| kkKKkk |
+|  kkkk  |

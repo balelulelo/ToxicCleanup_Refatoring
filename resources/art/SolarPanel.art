@@ -1,0 +1,27 @@
+solarPanel:default:
+|        |
+|        |
+| bcbbcb |
+| cccccc |
+| bcbbcb |
+| cccccc |
+| bcbbcb |
+|   kk   |
+solarPanel:off:
+|        |
+|        |
+| BvBBvB |
+| vvvvvv |
+| BvBBvB |
+| vvvvvv |
+| BvBBvB |
+|   kk   |
+solarPanel:damaged:
+|        |
+|        |
+| B      |
+| vB     |
+| BvBBB  |
+| vvvvvB |
+|  vBBvB |
+|   kk   |

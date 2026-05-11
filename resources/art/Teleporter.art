@@ -1,0 +1,72 @@
+teleporter:damaged:
+|RRkkkkRR|
+|RrR##RrR|
+|kRRRRrRk|
+|k#RrrR#k|
+|k#RrrR#k|
+|kRrRRrRk|
+|RrR##RrR|
+|RRkkkkRR|
+teleporter:1:
+|  kkkk  |
+| k####k |
+|k#pppp#k|
+|k#pPpp#k|
+|k#ppPp#k|
+|k#pppp#k|
+| k####k |
+|  kkkk  |
+teleporter:2:
+|  kkkk  |
+| k####k |
+|k#Pppp#k|
+|k#pppp#k|
+|k#pppp#k|
+|k#pppP#k|
+| k####k |
+|  kkkk  |
+teleporter:3:
+|  kkkk  |
+| k####k |
+|k#PPpp#k|
+|k#Pppp#k|
+|k#pppP#k|
+|k#ppPP#k|
+| k####k |
+|  kkkk  |
+teleporter:4:
+|  kkkk  |
+| k####k |
+|k#PPPp#k|
+|k#Pppp#k|
+|k#pppP#k|
+|k#pPPP#k|
+| k####k |
+|  kkkk  |
+teleporter:5:
+|  kkkk  |
+| k####k |
+|k#PPPp#k|
+|k#PppP#k|
+|k#PppP#k|
+|k#pPPP#k|
+| k####k |
+|  kkkk  |
+teleporter:6:
+|  kkkk  |
+| k####k |
+|k#pppp#k|
+|k#pPPp#k|
+|k#pPPp#k|
+|k#pppp#k|
+| k####k |
+|  kkkk  |
+teleporter:7:
+|  kkkk  |
+| k####k |
+|k#pppp#k|
+|k#pPPp#k|
+|k#pPPp#k|
+|k#pppp#k|
+| k####k |
+|  kkkk  |

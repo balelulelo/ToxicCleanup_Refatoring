@@ -1,0 +1,54 @@
+cleaner:default:
+|        |
+|  yyy   |
+| yyyyy  |
+| yKKKy  |
+| YYYYY  |
+|  yky   |
+| kYYYk  |
+|  Y#Y   |
+cleaner:right:
+|        |
+|   yyy  |
+|  yYYYy |
+|  YYYKK |
+|  YYYYy |
+|   Yky  |
+|   YYY  |
+|   Y Y  |
+cleaner:left:
+|        |
+|  yyy   |
+| yYYYy  |
+| KKYYY  |
+| yYYYY  |
+|  ykY   |
+|  YYY   |
+|  Y Y   |
+cleaner:up:
+|        |
+|  yyy   |
+| yYYYy  |
+| yYYYy  |
+| YYYYY  |
+|  yYy   |
+| kYYYk  |
+|  Y#Y   |
+cleaner:down:
+|        |
+|  yyy   |
+| yyyyy  |
+| yKKKy  |
+| YYYYY  |
+|  yky   |
+| kYYYk  |
+|  Y#Y   |
+cleaner:dead:
+|  WWWWW |
+| WwwwwwW|
+| WKKwKKW|
+| WKKwKKW|
+| WwwwwwW|
+|  WwKwW |
+|   WwW  |
+|   WWW  |

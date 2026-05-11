@@ -1,0 +1,99 @@
+pump:1:
+|        |
+|     rrr|
+|     rrr|
+|     rrr|
+|      # |
+|      # |
+|     kkk|
+|     kkk|
+pump:2:
+|        |
+|     rrr|
+|     rrr|
+|     rrr|
+|      # |
+|      # |
+|     kkk|
+|     kkk|
+pump:3:
+|        |
+|      r |
+|     rrr|
+|     rrr|
+|      # |
+|      # |
+|     kkk|
+|     kkk|
+pump:4:
+|        |
+|      # |
+|     rrr|
+|     rrr|
+|     rrr|
+|      # |
+|     kkk|
+|     kkk|
+pump:5:
+|        |
+|      # |
+|      # |
+|     rrr|
+|     rrr|
+|     rrr|
+|     kkk|
+|     kkk|
+pump:6:
+|        |
+|      # |
+|      # |
+|      # |
+|     rrr|
+|     rrr|
+|     kkk|
+|     kkk|
+pump:7:
+|        |
+|      # |
+|     g# |
+|      # |
+|     rrr|
+|     ggg|
+|     kkk|
+|     kkk|
+pump:8:
+|        |
+|      # |
+|      # |
+|      # |
+|     rrr|
+|     rrr|
+|     kkk|
+|     kkk|
+pump:9:
+|        |
+|      # |
+|      # |
+|     rrr|
+|     rrr|
+|      r |
+|     kkk|
+|     kkk|
+pump:10:
+|        |
+|     rrr|
+|     rrr|
+|     rrr|
+|      # |
+|      # |
+|     kkk|
+|     kkk|
+pump:damaged:
+|        |
+|        |
+|        |
+|        |
+|    kk  |
+|     kk |
+| RRR KKK|
+| RRR KKK|

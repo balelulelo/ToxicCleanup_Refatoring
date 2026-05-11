@@ -1,0 +1,8 @@
+player:x | 150
+player:y | 150
+
+machines:power | 8
+machines:
+
+spawnteleporter:x | 100
+spawnteleporter:y | 100
