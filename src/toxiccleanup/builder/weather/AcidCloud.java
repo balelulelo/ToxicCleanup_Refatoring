@@ -23,42 +23,67 @@ import toxiccleanup.builder.SpriteGallery;
 public class AcidCloud extends Cloud implements Damaging {
     final public static int SPAWN_TIME = 300;
     private static final SpriteGroup art = SpriteGallery.acidcloud;
-    private int currentArtFrame = 1;
-    private final int maxFrames = 5;
-    private final TickTimer animTimer = new RepeatingTimer(12);
 
     /**
-     * @param position
+     * Constructs a new {@link AcidCloud} at the given position.
+     *
+     * @param position the initial position of this acid cloud.
      */
     public AcidCloud(Positionable position) {
         super(position);
+        this.maxFrames = art.getSprites().size();
+        this.currentArtFrame = 1;
         setSprite(art.getSprite(currentArtFrame + ""));
     }
 
+    /**
+     * Advances this acid cloud by one game tick.
+     *
+     * <p>Delegates the movement logic to {@link Cloud#tick(EngineState, GameState)}, then advances
+     * the looping sprite animation via {@link Cloud#tickLoopingAnimation(SpriteGroup)}.
+     * If the cloud moves off either horizontal edge of the screen, it marks itself
+     * for removal.</p>
+     *
+     * <p>Requires: {@code state} and {@code game} must not be {@code null}.</p>
+     * <p>Ensures: if the cloud's x position is outside the screen bounds, it is marked
+     * for removal.</p>
+     *
+     * @param state the current engine state, including input and display dimensions.
+     * @param game  the current game state, including the player and world.
+     */
     @Override
     public void tick(EngineState state, GameState game) {
         super.tick(state, game);
-        this.animTimer.tick();
-
-        if (this.animTimer.isFinished()) {
-            currentArtFrame += 1;
-            if (currentArtFrame > maxFrames) {
-                currentArtFrame = 1;
-            }
-        }
-        setSprite(art.getSprite(currentArtFrame + ""));
+        tickLoopingAnimation(art);
         if (getX() < 0 || getX() > state.getDimensions().windowSize()) {
             markForRemoval();
-        } else {
-            //do nothing
         }
     }
 
+    /**
+     * Returns the {@link Damage} the acid cloud deals to machines in the same tile as the acid cloud.
+     *
+     * <p>Ensures: always returns a non-null {@link Damage} instance at this cloud's
+     * current position.</p>
+     *
+     * @param dimensions the screen and tile dimensions for pixel-to-tile conversion.
+     * @param position   the position of the machine being checked for damage.
+     * @return a {@link Damage} instance at this cloud's current position.
+     */
     @Override
     public Damage getDamage(Dimensions dimensions, Positionable position) {
         return new Damage(this.getPosition());
     }
 
+
+    /**
+     * Returns the {@link Damage} the acid cloud deals.
+     *
+     * <p>Ensures: always returns a {@link Damage} instance at this cloud's
+     * current position.</p>
+     *
+     * @return a {@link Damage} instance at this cloud's current position.
+     */
     @Override
     public Damage getDamage() {
         return new Damage(this.getPosition());

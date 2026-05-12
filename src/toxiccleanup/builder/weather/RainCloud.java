@@ -22,16 +22,34 @@ import toxiccleanup.builder.SpriteGallery;
  */
 public class RainCloud extends Cloud {
     private static final SpriteGroup art = SpriteGallery.raincloud;
-    private int currentArtFrame = 1;
-    private int maxFrames = 5;
-    private final TickTimer animTimer = new RepeatingTimer(12);
 
-
+    /**
+     * Constructs a new {@link RainCloud} at the given position.
+     *
+     * @param position the initial position of this rain cloud.
+     */
     public RainCloud(Positionable position) {
         super(position);
+        this.maxFrames = art.getSprites().size();
+        this.currentArtFrame = 1;
         setSprite(art.getSprite(currentArtFrame + ""));
     }
 
+    /**
+     * Advances this rain cloud by one game tick.
+     *
+     * <p>Delegates the movement logic to {@link Cloud#tick(EngineState, GameState)}, then advances
+     * the looping sprite animation via {@link Cloud#tickLoopingAnimation(SpriteGroup)}.
+     * If the cloud moves off either horizontal edge of the screen, it marks itself
+     * for removal.</p>
+     *
+     * <p>Requires: {@code state} and {@code game} must not be {@code null}.</p>
+     * <p>Ensures: if the cloud's x position is outside the screen bounds, it is marked
+     * for removal.</p>
+     *
+     * @param state the current engine state, including input and display dimensions.
+     * @param game  the current game state, including the player and world.
+     */
     @Override
     public void tick(EngineState state, GameState game) {
         super.tick(state, game);
