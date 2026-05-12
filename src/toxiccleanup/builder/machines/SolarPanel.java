@@ -69,11 +69,7 @@ public class SolarPanel extends GameEntity implements PlayerOverHook {
         super.tick(state);
 
         final Weather weather = game.getWeather();
-        Damage dmg = weather.getDamage(state.getDimensions(), this.getPosition());
-        if (dmg != null) {
-            this.damageHandler.setDamage(dmg);
-        }
-        if (this.damageHandler.isDamaged()) {
+        if(damageHandler.checkAndApplyDamage(weather, state.getDimensions(), this.getPosition())){
             setSprite(solarPanelArt.getSprite("damaged"));
             return; //exit early the solar panel is damaged!
         }

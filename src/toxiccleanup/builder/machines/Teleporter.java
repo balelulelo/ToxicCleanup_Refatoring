@@ -65,13 +65,9 @@ public class Teleporter extends GameEntity implements PlayerOverHook, Powered, D
         super.tick(state);
 
         final Weather weather = game.getWeather();
-        Damage dmg = weather.getDamage(state.getDimensions(), this.getPosition());
-        if (dmg != null) {
-            this.damageHandler.setDamage(dmg);
-        }
-        if (this.damageHandler.isDamaged()) {
+        if(damageHandler.checkAndApplyDamage(weather, state.getDimensions(), this.getPosition())){
             setSprite(art.getSprite("damaged"));
-            return; //exit early the solar panel is damaged!
+            return; //exit early the teleporter is damaged!
         }
 
         animTimer.tick();

@@ -23,7 +23,7 @@ public class WeatherSpawnPoint implements Tickable {
      * Constructs a new instance of {@link WeatherSpawnPoint}
      * using the given position, timer and spawner.
      *
-     * <p>Precondition: {@code position}, {@code timer}, and {@code spawner} must not be NULL</p>
+     * <p>Requires: {@code position}, {@code timer}, and {@code spawner} must not be NULL</p>
      *
      * @param position position that will be passed to the {@link Spawner} when it fires.
      * @param timer    the timer that will be used to determine when to call the {@link Spawner}.

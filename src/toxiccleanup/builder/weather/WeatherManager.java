@@ -88,9 +88,9 @@ public class WeatherManager implements Weather {
      * Return {@link Damage} the given tile location is currently experiencing otherwise
      * returns null.
      *
-     * <p>Precondition: {@code dimensions} and {@code position} must not be {@code null}</p>
+     * <p>Requires: {@code dimensions} and {@code position} must not be {@code null}</p>
      *
-     * <p>Postcondition: returns a {@link Damage} instance if {@link Damage} phenomenon shares the same
+     * <p>ensures: returns a {@link Damage} instance if {@link Damage} phenomenon shares the same
      * tile as {@code position}. otherwise, returns {@code null}</p>
      *
      * @param dimensions screen and tile dimensions
@@ -135,7 +135,7 @@ public class WeatherManager implements Weather {
      * <p>Delegates the underlying logic to {@link #getDamage(Dimensions, Positionable)}. Converts
      * a {@code Damage} object to a boolean status.</p>
      *
-     * <p>Precondition: {@code dimensions} and {@code position} must not be null</p>
+     * <p>Requires: {@code dimensions} and {@code position} must not be null</p>
      *
      * @param dimensions screen and tile dimensions for pixel to tile conversion
      * @param position   the position to check for damaging weather
