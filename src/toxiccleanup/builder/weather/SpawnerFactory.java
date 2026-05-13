@@ -22,6 +22,7 @@ import toxiccleanup.engine.timing.RepeatingTimer;
  * </p>
  */
 public class SpawnerFactory {
+
     public static WeatherSpawnPoint fromSymbol(Positionable position, char symbol) {
         WeatherSpawnPoint result = null;
         if (symbol == 'c') {

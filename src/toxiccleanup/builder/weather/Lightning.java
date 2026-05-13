@@ -48,6 +48,15 @@ public class Lightning extends GameEntity implements Damaging {
     }
 
     /**
+     * Advances this lightning bolt by one game tick.
+     *
+     * <p>Ticks the lifespan and animation timers. If the lifespan timer finishes, the bolt
+     * marks itself for removal. If the animation timer fires, the sprite advances to the
+     * next frame.</p>
+     *
+     * <p>Ensures: if the lifespan timer has finished, this entity will be marked for removal.
+     *
+     * {@code animFrame} remains in the range [1, finalAnimFrameIndex].</p>
      * @param state The state of the engine, including the mouse, keyboard information and
      *              dimension. Useful for processing keyboard presses or mouse movement.
      * @param game  The state of the game, including the player and world. Can be used to query or
@@ -66,15 +75,29 @@ public class Lightning extends GameEntity implements Damaging {
         }
     }
 
-
+    /**
+     * Returns the {@link LightningDamage} this bolt deals at the given tile position.
+     *
+     * <p>This method always returns a non-null {@link LightningDamage} regardless
+     * of the current animation frame.</p>
+     *
+     * <p>Requires: {@code dimensions} and {@code position} must not be {@code null}.</p>
+     *
+     * @param dimensions the screen and tile dimensions for pixel-to-tile conversion.
+     * @param position   the position of the entity being checked for damage.
+     * @return a {@link LightningDamage} instance at this bolt's current position.
+     */
     @Override
     public Damage getDamage(Dimensions dimensions, Positionable position) {
         return new LightningDamage(this.getPosition());
     }
 
     /**
-     * Returns an instance of the damage Lightning can do
-     * if it is currently in a damage dealing state.
+     * Returns the {@link LightningDamage} this bolt deals if it is currently in its
+     * active damage-dealing frames (frames 5 and 6), or {@code null} otherwise.
+     *
+     * <p>Ensures: returns a non-null {@link Damage} only during animation frames 5 and 6.
+     * Returns {@code null} during all other frames.</p>
      *
      * @return instance of {@link Damage}
      */
@@ -86,9 +109,9 @@ public class Lightning extends GameEntity implements Damaging {
     }
 
     /**
-     * Returns if the {@link Lightning} is currently in its state that would deal {@link Damage}
+     * Returns if the {@link Lightning} is currently in its damage dealing state that would deal {@link Damage}
      *
-     * @return if the {@link Lightning} is currently in its state that would deal {@link Damage}
+     * @return if the {@link Lightning} is currently in its damage dealing state that would deal {@link Damage}
      */
     public boolean isDamaging() {
         final boolean isActiveHitFrames = animFrame == 5 || animFrame == 6;
@@ -99,6 +122,8 @@ public class Lightning extends GameEntity implements Damaging {
     /**
      * Handles updating the anim to the next sprite,
      * adjusting our internal index and resetting it to the start if we go past the final index.
+     *
+     * <p>Ensures: {@code animFrame} is always in the range [1, finalAnimFrameIndex].</p>
      */
     private void updateArt() {
         animFrame += 1;

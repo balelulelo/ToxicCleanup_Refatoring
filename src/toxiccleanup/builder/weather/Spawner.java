@@ -11,5 +11,14 @@ import toxiccleanup.builder.entities.GameEntity;
  */
 @FunctionalInterface
 public interface Spawner {
+    /**
+     * Creates a new {@link GameEntity} at the given position.
+     *
+     * <p>Requires: {@code position} must not be {@code null}.</p>
+     * <p>Ensures: returns a non-null {@link GameEntity} at the given position.</p>
+     *
+     * @param position the position at which to spawn the new entity.
+     * @return a new {@link GameEntity} at the given position.
+     */
     public GameEntity spawn(Positionable position);
 }

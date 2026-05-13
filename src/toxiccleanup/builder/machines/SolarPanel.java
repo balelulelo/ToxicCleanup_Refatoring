@@ -48,6 +48,13 @@ public class SolarPanel extends GameEntity implements PlayerOverHook {
         damageHandler = new DamageHandler();
     }
 
+    /**
+     * Constructs a new {@link SolarPanel} at the given position using the given
+     * {@link DamageHandler}.
+     *
+     * @param position      the position we wish to spawn the {@link SolarPanel} at.
+     * @param damageHandler the damage handler to use for this solar panel.
+     */
     public SolarPanel(Positionable position, DamageHandler damageHandler) {
         super(position);
         setSprite(solarPanelArt.getSprite("default"));

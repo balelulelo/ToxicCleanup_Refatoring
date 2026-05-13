@@ -29,6 +29,11 @@ public class LightningRod extends GameEntity implements PlayerOverHook, Damageab
     private final DamageHandler damageHandler;
     private static final char USE_KEY = 'e';
 
+    /**
+     * Constructs a new {@link LightningRod} at the given position.
+     *
+     * @param position the position we wish to spawn this {@link LightningRod} at.
+     */
     public LightningRod(Positionable position) {
         super(position);
         this.setSprite(art.getSprite("default"));

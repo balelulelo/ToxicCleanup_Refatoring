@@ -18,11 +18,17 @@ public interface Damageable {
 
     /**
      * Sets the Damageable Object to it's damaged state.
+     *
+     * <p>Ensures: {@code isDamaged()} returns {@code true} after this call.</p>
+     *
+     * @param dmg the {@link Damage} instance that caused this object to become damaged.
      */
     void setDamage(Damage dmg);
 
     /**
      * Sets the Damageable Object to it's undamaged
+     *
+     * <p>Ensures: {@code isDamaged()} returns {@code false} after this call.</p>
      */
     void repairDamage();
 }

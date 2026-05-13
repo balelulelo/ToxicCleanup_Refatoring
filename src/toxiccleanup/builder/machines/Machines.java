@@ -63,6 +63,15 @@ public interface Machines extends Adjustable, Tickable {
      */
     SolarPanel spawnSolarPanel(Positionable position);
 
+    /**
+     * Attempts to create a {@link LightningRod} at the given location and return it.
+     * Should only create if there is enough power to pay the {@link LightningRod} COST (1).
+     * If the current power is at least 1, this method deducts 1 power and returns
+     * the new LightningRod. Otherwise, this method returns {@code null}.
+     *
+     * @param position the position we wish to spawn the {@link LightningRod} at.
+     * @return the newly created {@link LightningRod}, or {@code null} if power {@literal <} 1.
+     */
     LightningRod spawnLightningRod(Positionable position);
 
     /**

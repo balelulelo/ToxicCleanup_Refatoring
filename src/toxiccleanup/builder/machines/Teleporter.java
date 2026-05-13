@@ -36,7 +36,7 @@ public class Teleporter extends GameEntity implements PlayerOverHook, Powered, D
     private final int finalAnimFrameIndex;
     private final TickTimer animTimer;
     private int animFrame = 1;
-    final private DamageHandler damageHandler;
+    private final DamageHandler damageHandler;
     
     /**
      * Constructs a new Teleporter at the given position.
@@ -65,10 +65,10 @@ public class Teleporter extends GameEntity implements PlayerOverHook, Powered, D
         super.tick(state);
 
         final Weather weather = game.getWeather();
-        if(damageHandler.checkAndApplyDamage(weather, state.getDimensions(), this.getPosition())){
-            setSprite(art.getSprite("damaged"));
-            return; //exit early the teleporter is damaged!
-        }
+            if(damageHandler.checkAndApplyDamage(weather, state.getDimensions(), this.getPosition())){
+                setSprite(art.getSprite("damaged"));
+                return; //exit early the teleporter is damaged!
+            }
 
         animTimer.tick();
         if (animTimer.isFinished() && game.getMachines().hasRequiredPower(getPowerRequirement())) {
@@ -141,6 +141,8 @@ public class Teleporter extends GameEntity implements PlayerOverHook, Powered, D
 
     /**
      * Sets the Damageable Object to it's damaged state.
+     *
+     * @param dmg the {@link Damage} instance that caused this teleporter to become damaged.
      */
     @Override
     public void setDamage(Damage dmg) {
@@ -149,6 +151,8 @@ public class Teleporter extends GameEntity implements PlayerOverHook, Powered, D
 
     /**
      * Sets the Damageable Object to it's undamaged
+     *
+     * <p>Ensures: {@code isDamaged()} returns {@code false} after this call.</p>
      */
     @Override
     public void repairDamage() {
